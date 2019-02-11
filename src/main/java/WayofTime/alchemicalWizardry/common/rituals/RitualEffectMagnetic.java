@@ -22,6 +22,7 @@ import WayofTime.alchemicalWizardry.api.rituals.RitualEffect;
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
 import WayofTime.alchemicalWizardry.common.ItemType;
 import WayofTime.alchemicalWizardry.common.block.BlockTeleposer;
+import gregtech.common.blocks.GT_Block_Ores;
 
 public class RitualEffectMagnetic extends RitualEffect
 {
@@ -34,7 +35,7 @@ public class RitualEffectMagnetic extends RitualEffect
     public static boolean isBlockOre(Block block, int meta)
     {
         //Special case for lit redstone ore
-        if (block instanceof BlockOre || block instanceof BlockRedstoneOre)
+        if (block instanceof BlockOre || block instanceof BlockRedstoneOre || block instanceof GT_Block_Ores)
             return true;
         
         if (block == null || Item.getItemFromBlock(block) == null)
@@ -55,7 +56,10 @@ public class RitualEffectMagnetic extends RitualEffect
         ItemStack itemStack = type.createStack(1);
         for (int id : OreDictionary.getOreIDs(itemStack))
         {
+			// if (id == 1164)
+				// return true; // current GT ore
             String oreName = OreDictionary.getOreName(id);
+			// System.out.println(oreName + " " + id);
             if (oreName.contains("ore"))
                 return true;
         }
